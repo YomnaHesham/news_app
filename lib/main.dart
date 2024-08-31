@@ -1,10 +1,19 @@
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:news/home_screen.dart';
-import 'package:news/splash_screen.dart';
+import 'package:news/app_theme.dart';
+import 'package:news/screens/home_screen.dart';
+import 'package:news/screens/splash_screen.dart';
 
-void main() {
-  runApp(NewsApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en'), Locale('ar')],
+      path: 'assets/translations',
+      child: NewsApp(),
+    ),
+  );
 }
 
 class NewsApp extends StatelessWidget {
@@ -12,16 +21,18 @@ class NewsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        routes: {
-          HomeScreen.routName: (context) => HomeScreen(),
-          SplashScreen.routName: (context) => SplashScreen(),
-      
-        },
-        initialRoute: SplashScreen.routName,
-      ),
+    return MaterialApp(
+      // localizationsDelegates: context.localizationDelegates,
+      // supportedLocales: context.supportedLocales,
+      // locale: context.locale,
+      debugShowCheckedModeBanner: false,
+      routes: {
+        HomeScreen.routName: (context) => HomeScreen(),
+        SplashScreen.routName: (context) => SplashScreen(),
+      },
+      initialRoute: SplashScreen.routName,
+      theme: AppTheme.lightTheme,
+      themeMode: ThemeMode.light,
     );
   }
 }

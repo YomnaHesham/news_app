@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:news/home_screen.dart';
+import 'package:news/app_theme.dart';
+import 'package:news/screens/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routName = "splash";
@@ -23,11 +24,12 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Container(
         decoration: BoxDecoration(
+          color: AppTheme.white,
           image: DecorationImage(
             image: AssetImage("assets/images/bg.png"),
+            fit: BoxFit.fill,
           ),
         ),
         width: double.infinity,
