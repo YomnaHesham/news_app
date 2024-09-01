@@ -32,12 +32,17 @@ class AppTheme {
       titleLarge: GoogleFonts.poppins(
         color: navy,
         fontWeight: FontWeight.w700,
-        fontSize: 22,
+        fontSize: 24,
       ),
       titleMedium: GoogleFonts.exo(
         color: white,
         fontWeight: FontWeight.w400,
         fontSize: 22,
+      ),
+      titleSmall:  GoogleFonts.inder(
+        color: primary,
+        fontWeight: FontWeight.w700,
+        fontSize: 14,
       ),
     ),
   );

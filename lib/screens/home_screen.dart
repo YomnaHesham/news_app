@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:news/apis/api_manager.dart';
 import 'package:news/app_theme.dart';
 import 'package:news/screens/categories/categories_detailes.dart';
+import 'package:news/screens/drawer.dart';
 import 'package:news/screens/news_content.dart';
+import 'package:news/screens/settings/settings.dart';
 import 'package:news/screens/tab_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedTabIndex = 0;
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       child: Scaffold(
-        drawer: Drawer(),
+        drawer: HomeDrawer(
+          onItemSelection: OnDrawerItemSelection,
+        ),
         appBar: AppBar(
           iconTheme: IconThemeData(color: AppTheme.white, size: 32),
           title: const Text(
@@ -45,8 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         ),
-        body:
-          CategoriesDetailes(),
+        body: selectedDrawerItem == DrawerItem.categories
+            ? CategoriesDetailes()
+            : const Settings(),
         // Column(
         //   children: [
         //     TabBarWidget(),
@@ -58,5 +64,13 @@ class _HomeScreenState extends State<HomeScreen> {
         // ),
       ),
     );
+  }
+
+  DrawerItem selectedDrawerItem = DrawerItem.categories;
+
+  void OnDrawerItemSelection(DrawerItem drawerItemSelect) {
+    selectedDrawerItem = drawerItemSelect;
+    setState(() {});
+    Navigator.of(context).pop();
   }
 }
