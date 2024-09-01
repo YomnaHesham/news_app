@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:news/apis/api_manager.dart';
 import 'package:news/app_theme.dart';
 import 'package:news/screens/categories/categories_detailes.dart';
+import 'package:news/screens/categories/category_item_model.dart';
+import 'package:news/screens/category_item_detailes/category_item_detailes.dart';
 import 'package:news/screens/drawer.dart';
-import 'package:news/screens/news_content.dart';
+import 'package:news/screens/category_item_detailes/news_content.dart';
 import 'package:news/screens/settings/settings.dart';
-import 'package:news/screens/tab_bar.dart';
+import 'package:news/screens/category_item_detailes/tab_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routName = "home";
@@ -18,7 +20,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedTabIndex = 0;
-
 
   @override
   Widget build(BuildContext context) {
@@ -50,27 +51,30 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         ),
-        body: selectedDrawerItem == DrawerItem.categories
-            ? CategoriesDetailes()
-            : const Settings(),
-        // Column(
-        //   children: [
-        //     TabBarWidget(),
-        //     SizedBox(
-        //       height: 16,
-        //     ),
-        //     NewsContent(),
-        //   ],
-        // ),
+        body: categoryItemModel != null
+            ? CategoryItemDetailes(categoryItemModel!.id)
+            : selectedDrawerItem == DrawerItem.categories
+                ? CategoriesDetailes(
+                    onCategorySelect: OnCategoryItemSelection,
+                  )
+                : const Settings(),
       ),
     );
   }
 
   DrawerItem selectedDrawerItem = DrawerItem.categories;
 
+  CategoryItemModel? categoryItemModel;
+
   void OnDrawerItemSelection(DrawerItem drawerItemSelect) {
     selectedDrawerItem = drawerItemSelect;
+    categoryItemModel = null;
     setState(() {});
     Navigator.of(context).pop();
+  }
+
+  void OnCategoryItemSelection(CategoryItemModel categoryItemSelect) {
+    categoryItemModel = categoryItemSelect;
+    setState(() {});
   }
 }

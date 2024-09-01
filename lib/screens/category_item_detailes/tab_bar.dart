@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/apis/api_manager.dart';
-import 'package:news/screens/tab_item.dart';
+import 'package:news/screens/category_item_detailes/tab_item.dart';
 
 class TabBarWidget extends StatefulWidget {
   const TabBarWidget({super.key});
@@ -23,26 +23,29 @@ class _TabBarWidgetState extends State<TabBarWidget> {
           );
         }
         if (snapshot.hasError) {
-          return Text("Somting Went Wrong");
+          return Center(child: Text("Somting Went Wrong"));
         }
         var sources = snapshot.data?.sources ?? [];
         return DefaultTabController(
-            length: sources.length,
-            child: TabBar(
-                onTap: (value) {
-                  selectedTabIndex = value;
-                  setState(() {});
-                },
-                isScrollable: true,
-                indicatorColor: Colors.transparent,
-                dividerColor: Colors.transparent,
-                tabs: sources
-                    .map((e) => TabItem(
-                  source: e,
-                  isSelected:
-                  sources.elementAt(selectedTabIndex) == e,
-                ))
-                    .toList()));
+          length: sources.length,
+          child: TabBar(
+            onTap: (value) {
+              selectedTabIndex = value;
+              setState(() {});
+            },
+            isScrollable: true,
+            indicatorColor: Colors.transparent,
+            dividerColor: Colors.transparent,
+            tabAlignment: TabAlignment.start,
+            tabs: sources
+                .map(
+                  (e) => TabItem(
+                    source: e,
+                    isSelected: sources.elementAt(selectedTabIndex) == e,
+                  ),
+                ).toList(),
+          ),
+        );
       },
     );
   }

@@ -44,6 +44,16 @@ class AppTheme {
         fontWeight: FontWeight.w700,
         fontSize: 14,
       ),
+      bodyMedium: GoogleFonts.poppins(
+        color: navy,
+        fontWeight: FontWeight.w500,
+        fontSize: 14,
+      ),
+      bodySmall: GoogleFonts.poppins(
+        color: gray,
+        fontWeight: FontWeight.w400,
+        fontSize: 10,
+      ),
     ),
   );
 }
