@@ -34,4 +34,20 @@ class ApiManager {
 
     return newsDataResponse;
   }
+
+  static Future<NewsDataResponse> searchNews(String query) async {
+    Uri url = Uri.https("newsapi.org", "/v2/everything", {
+      "apiKey": "7ecb65909e734bba85c740251ef71418",
+    });
+    http.Response response = await http.get(url);
+    var jsonFormat = jsonDecode(response.body);
+
+    NewsDataResponse searchResponse = NewsDataResponse.fromJson(jsonFormat);
+
+      return searchResponse;
+    }
+
+
 }
+
+

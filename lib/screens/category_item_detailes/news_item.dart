@@ -23,27 +23,30 @@ class NewsItem extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.25,
               width: double.infinity,
               fit: BoxFit.fill,
-              placeholder: (context, url) => Center(
+              placeholder: (context, url) => const Center(
                 child: CircularProgressIndicator(
                   color: AppTheme.primary,
                 ),
               ),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 8,
           ),
           Text(
+            textAlign: TextAlign.left,
             article.author ?? "",
             style: Theme.of(context).textTheme.bodySmall,
           ),
           Text(
             article.title ?? "",
+            textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           Text(
             article.description ?? "",
+            textAlign: TextAlign.left,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           Align(

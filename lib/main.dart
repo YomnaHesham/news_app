@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:news/app_theme.dart';
+import 'package:news/screens/category_item_detailes/news_detailes.dart';
 import 'package:news/screens/home_screen.dart';
 import 'package:news/screens/splash_screen.dart';
 
@@ -28,8 +29,8 @@ class NewsApp extends StatelessWidget {
       locale: context.locale,
       debugShowCheckedModeBanner: false,
       routes: {
-        HomeScreen.routName: (context) => HomeScreen(),
         SplashScreen.routName: (context) => const SplashScreen(),
+        HomeScreen.routName: (context) => HomeScreen(),
       },
       initialRoute: SplashScreen.routName,
       theme: AppTheme.lightTheme,

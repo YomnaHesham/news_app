@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:news/apis/api_manager.dart';
 import 'package:news/app_theme.dart';
+import 'package:news/screens/category_item_detailes/news_detailes.dart';
 import 'package:news/screens/category_item_detailes/news_item.dart';
 import 'package:news/screens/category_item_detailes/tab_item.dart';
 
 class TabBarWidget extends StatefulWidget {
   String categoryId;
+
   TabBarWidget({required this.categoryId, super.key});
 
   @override
@@ -14,6 +16,9 @@ class TabBarWidget extends StatefulWidget {
 
 class _TabBarWidgetState extends State<TabBarWidget> {
   int selectedTabIndex = 0;
+  int selectedNewIndex = 0;
+
+  bool onNewsItemClick = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +33,7 @@ class _TabBarWidgetState extends State<TabBarWidget> {
           );
         }
         if (snapshot.hasError || snapshot.data?.status != "ok") {
-          return Center(child: Text("Something Went Wrong"));
+          return const Center(child: Text("Something Went Wrong"));
         }
         var sources = snapshot.data?.sources ?? [];
         return Column(
@@ -54,11 +59,12 @@ class _TabBarWidgetState extends State<TabBarWidget> {
                     .toList(),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             FutureBuilder(
-              future: ApiManager.getNewsData(sources[selectedTabIndex].id??""),
+              future:
+                  ApiManager.getNewsData(sources[selectedTabIndex].id ?? ""),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
@@ -68,20 +74,28 @@ class _TabBarWidgetState extends State<TabBarWidget> {
                   );
                 }
                 if (snapshot.hasError) {
-                  return Center(child: Text("Somting Went Wrong"));
+                  return const Center(child: Text("Something Went Wrong"));
                 }
                 var articles = snapshot.data?.articles ?? [];
-                return Expanded(
-                  child: ListView.separated(
-                    separatorBuilder: (context, index) => SizedBox(
-                      height: 16,
-                    ),
-                    itemBuilder: (context, index) {
-                      return NewsItem(article: articles[index]);
-                    },
-                    itemCount: articles.length,
-                  ),
-                );
+                return !onNewsItemClick
+                    ? Expanded(
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) => const SizedBox(
+                            height: 16,
+                          ),
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                                onTap: () {
+                                  onNewsItemClick = !onNewsItemClick;
+                                  selectedNewIndex = index;
+                                  setState(() {});
+                                },
+                                child: NewsItem(article: articles[index]));
+                          },
+                          itemCount: articles.length,
+                        ),
+                      )
+                    : NewsDetailes(article: articles[selectedNewIndex]);
               },
             )
           ],
