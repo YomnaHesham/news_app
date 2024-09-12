@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:news/app_theme.dart';
 import 'package:news/screens/settings/language_bottom_sheet.dart';
@@ -13,13 +14,13 @@ class Settings extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Language",
+            "language".tr(),
             style: Theme.of(context)
                 .textTheme
                 .titleLarge!
                 .copyWith(color: AppTheme.black),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           InkWell(
@@ -29,13 +30,13 @@ class Settings extends StatelessWidget {
                 isScrollControlled: true,
                 context: context,
                 builder: (context) {
-                  return LanguageBottomSheet();
+                  return const LanguageBottomSheet();
                 },
               );
             },
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 border: Border.all(
                   width: 2,
@@ -48,11 +49,16 @@ class Settings extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      "English",
+                      context.locale == const Locale("en")
+                          ? "english".tr()
+                          : "arabic".tr(),
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
-                  Icon(Icons.arrow_drop_down_outlined,color: AppTheme.primary,),
+                  const Icon(
+                    Icons.arrow_drop_down_outlined,
+                    color: AppTheme.primary,
+                  ),
                 ],
               ),
             ),

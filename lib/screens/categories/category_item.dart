@@ -10,14 +10,14 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: model.bgColor,
         borderRadius: BorderRadius.only(
-          topRight: Radius.circular(25),
-          topLeft: Radius.circular(25),
-          bottomLeft: !isOdd ? Radius.circular(25) : Radius.zero,
-          bottomRight: isOdd ? Radius.circular(25) : Radius.zero,
+          topRight: const Radius.circular(25),
+          topLeft: const Radius.circular(25),
+          bottomLeft: !isOdd ? const Radius.circular(25) : Radius.zero,
+          bottomRight: isOdd ? const Radius.circular(25) : Radius.zero,
         ),
       ),
       child: Column(

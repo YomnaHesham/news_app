@@ -9,9 +9,10 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('ar')],
+      supportedLocales: const [Locale('en'), Locale('ar')],
+      saveLocale: true,
       path: 'assets/translations',
-      child: NewsApp(),
+      child: const NewsApp(),
     ),
   );
 }
@@ -22,13 +23,13 @@ class NewsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // localizationsDelegates: context.localizationDelegates,
-      // supportedLocales: context.supportedLocales,
-      // locale: context.locale,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
       routes: {
         HomeScreen.routName: (context) => HomeScreen(),
-        SplashScreen.routName: (context) => SplashScreen(),
+        SplashScreen.routName: (context) => const SplashScreen(),
       },
       initialRoute: SplashScreen.routName,
       theme: AppTheme.lightTheme,

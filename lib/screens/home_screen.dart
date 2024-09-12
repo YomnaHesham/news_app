@@ -1,11 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:news/apis/api_manager.dart';
 import 'package:news/app_theme.dart';
 import 'package:news/screens/categories/categories_detailes.dart';
 import 'package:news/screens/categories/category_item_model.dart';
-import 'package:news/screens/category_item_detailes/category_item_detailes.dart';
 import 'package:news/screens/drawer.dart';
-import 'package:news/screens/category_item_detailes/news_content.dart';
 import 'package:news/screens/settings/settings.dart';
 import 'package:news/screens/category_item_detailes/tab_bar.dart';
 
@@ -36,14 +34,14 @@ class _HomeScreenState extends State<HomeScreen> {
           onItemSelection: OnDrawerItemSelection,
         ),
         appBar: AppBar(
-          iconTheme: IconThemeData(color: AppTheme.white, size: 32),
-          title: const Text(
-            "News App",
+          iconTheme: const IconThemeData(color: AppTheme.white, size: 32),
+          title: Text(
+            "news".tr(),
           ),
           actions: [
             IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.search,
                 color: AppTheme.white,
                 size: 32,
@@ -52,12 +50,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         body: categoryItemModel != null
-            ? CategoryItemDetailes(categoryItemModel!.id)
+            ? TabBarWidget(categoryId: categoryItemModel!.id)
             : selectedDrawerItem == DrawerItem.categories
                 ? CategoriesDetailes(
                     onCategorySelect: OnCategoryItemSelection,
                   )
-                : const Settings(),
+                :  Settings(),
       ),
     );
   }

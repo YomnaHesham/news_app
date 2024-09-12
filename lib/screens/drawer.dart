@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:news/app_theme.dart';
 
@@ -19,7 +20,7 @@ class HomeDrawer extends StatelessWidget {
             width: double.infinity,
             child: Center(
               child: Text(
-                "News App!",
+                "news".tr(),
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: AppTheme.white,
                     ),
@@ -30,23 +31,23 @@ class HomeDrawer extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 InkWell(
                   onTap: () => onItemSelection(DrawerItem.categories),
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.list,
                         color: AppTheme.black,
                         size: 32,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
-                        "Categories",
+                        "categories".tr(),
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
                               color: AppTheme.black,
                             ),
@@ -54,23 +55,23 @@ class HomeDrawer extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 InkWell(
                   onTap: () => onItemSelection(DrawerItem.settings),
                   child: Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.settings,
                         color: AppTheme.black,
                         size: 32,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 16,
                       ),
                       Text(
-                        "Settings",
+                        "settings".tr(),
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
                               color: AppTheme.black,
                             ),

@@ -37,7 +37,7 @@ class AppTheme {
       titleMedium: GoogleFonts.exo(
         color: white,
         fontWeight: FontWeight.w400,
-        fontSize: 22,
+        fontSize: 20,
       ),
       titleSmall:  GoogleFonts.inder(
         color: primary,
